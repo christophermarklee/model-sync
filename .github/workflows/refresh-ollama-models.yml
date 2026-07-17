@@ -1,0 +1,30 @@
+name: Refresh Ollama Models
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+
+jobs:
+  refresh-models:
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Ollama
+        run: sudo dnf install -y ollama
+
+      - name: Enable and start Ollama service
+        run: sudo systemctl enable --now ollama
+
+      - name: Pull models from manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          while IFS= read -r model; do
+            [[ -z "$model" || "$model" =~ ^# ]] && continue
+            echo "Pulling $model"
+            ollama pull "$model"
+          done < nvidia_4090_models.manifest

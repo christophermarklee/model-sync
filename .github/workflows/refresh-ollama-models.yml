@@ -12,12 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Ollama
-        run: sudo dnf install -y ollama
-
-      - name: Enable and start Ollama service
-        run: sudo systemctl enable --now ollama
-
       - name: Pull models from manifest
         shell: bash
         run: |

@@ -13,7 +13,7 @@ This repository keeps a curated set of Ollama models fresh on a weekly schedule 
 ## Files
 
 - `.github/workflows/refresh-ollama-models.yml`: Weekly workflow that installs Ollama, enables the service, and pulls models.
-- `nvidia_4090_models.manifest`: Source of truth for model tags to pull.
+- `nvidia_4090_models.conf`: Source of truth for model tags to pull.
 - `NVIDIA-4090.md`: Human-readable recommendations and rationale.
 
 ## Workflow behavior
@@ -24,7 +24,7 @@ It executes:
 
 1. `sudo dnf install -y ollama`
 2. `sudo systemctl enable --now ollama`
-3. `ollama pull $model` for each line in `nvidia_4090_models.manifest`
+3. `ollama pull $model` for each line in `nvidia_4090_models.conf`
 
 ## Runner requirements
 

@@ -21,4 +21,4 @@ jobs:
             [[ -z "$model" || "$model" =~ ^# ]] && continue
             echo "Pulling $model"
             ollama pull "$model"
-          done < nvidia_4090_models.manifest
+          done < nvidia_4090_models.conf
